@@ -169,6 +169,7 @@ on post-fs-data
     chown  system  system  /sys/devices/platform/fingerprint/read_image_flag
     chmod  0660  /sys/devices/platform/fingerprint/nav
     chown  system  system  /sys/devices/platform/fingerprint/nav
+    write  /sys/devices/platform/fingerprint/nav 1
 
     # change the limition below for sensor-hub
     chown root system /sys/devices/soc0/huawei_product

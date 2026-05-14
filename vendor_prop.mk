@@ -67,6 +67,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.qti.telephony.vt_cam_interface=1 \
     persist.camera.gyro.android=1 \
     persist.camera.HAL3.enabled=1 \
+    persist.camera.preview.ubwc=0 \
     persist.camera.is_type=1 \
     persist.camera.pip_disable=1 \
     camera.lowpower.record.enable=1 \

@@ -8161,9 +8161,27 @@ int QCamera3HardwareInterface::getCamInfo(uint32_t cameraId,
 #endif
     info->static_camera_characteristics = gStaticMetadata[cameraId];
 
-    //For now assume both cameras can operate independently.
-    info->conflicting_devices = NULL;
-    info->conflicting_devices_length = 0;
+    static char cameraId0[] = "0";
+    static char cameraId1[] = "1";
+    static char *camera0Conflicts[] = { cameraId1 };
+    static char *camera1Conflicts[] = { cameraId0 };
+
+    /*
+     * Bach shares the VFE/CSI path between the two sensors. Leaving the
+     * conflict list empty lets CameraService open both devices during quick
+     * front/back switches, which can wedge the VFE reset path and leave preview
+     * black. Tell the framework to serialize the two physical cameras.
+     */
+    if (cameraId == 0) {
+        info->conflicting_devices = camera0Conflicts;
+        info->conflicting_devices_length = 1;
+    } else if (cameraId == 1) {
+        info->conflicting_devices = camera1Conflicts;
+        info->conflicting_devices_length = 1;
+    } else {
+        info->conflicting_devices = NULL;
+        info->conflicting_devices_length = 0;
+    }
 
     //resource cost is 100 * MIN(1.0, m/M),
     //where m is throughput requirement with maximum stream configuration
