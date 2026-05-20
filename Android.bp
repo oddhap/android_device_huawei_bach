@@ -1,3 +1,2 @@
-subdirs = [
-    "touch",
-]
+soong_namespace {
+}

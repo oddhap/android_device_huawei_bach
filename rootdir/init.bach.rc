@@ -1,0 +1,18 @@
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    mount_all /vendor/etc/fstab.qcom
+
+on post-fs
+    mkdir /mnt/vendor/persist 0771 root system
+    restorecon_recursive /mnt/vendor/persist
+
+on post-fs-data
+    mkdir /data/vendor 0771 root root
+    mkdir /data/vendor/tombstones 0771 root system
+
+on boot
+    setprop vendor.usb.controller ${sys.usb.controller}
+
+on property:sys.boot_completed=1
+    swapon_all /vendor/etc/fstab.qcom
