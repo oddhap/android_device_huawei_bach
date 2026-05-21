@@ -1,3 +1,6 @@
 /vendor/etc/fstab\.qcom                 u:object_r:vendor_configs_file:s0
 /vendor/etc/init/hw/init\.bach\.rc      u:object_r:vendor_configs_file:s0
 /vendor/etc/init/hw/init\.bach\.usb\.rc u:object_r:vendor_configs_file:s0
+/firmware(/.*)?                         u:object_r:rootfs:s0
+/persist(/.*)?                          u:object_r:rootfs:s0
+/dsp(/.*)?                              u:object_r:rootfs:s0

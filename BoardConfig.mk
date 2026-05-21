@@ -83,6 +83,10 @@ BOARD_ROOT_EXTRA_SYMLINKS += \
     /mnt/vendor/persist:/persist \
     /vendor/dsp:/dsp
 
+# Temporary for the first Android 16 boot: preserve legacy 17.1 vendor
+# ELF blobs while we prove which proprietary pieces are actually required.
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 # Minimal SELinux: first boot is intentionally permissive.
 BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/minimal
 SELINUX_IGNORE_NEVERALLOWS := true
