@@ -157,6 +157,7 @@ BOARD_USES_ADRENO := true
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(VENDOR_PATH)/prebuilts/framework_manifest.xml
 DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/prebuilts/manifest.xml
 DEVICE_MATRIX_FILE := $(VENDOR_PATH)/prebuilts/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE += $(VENDOR_PATH)/prebuilts/vintf/vendor.qti.gnss@3.0-service.xml
 
 # Init
 TARGET_INIT_VENDOR_LIB := //$(VENDOR_PATH):libinit_bach
@@ -223,7 +224,7 @@ BOARD_ROOT_EXTRA_SYMLINKS += \
     /vendor/dsp:/dsp
 
 # SELinux
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
+include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(VENDOR_PATH)/sepolicy/private
 BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
 SELINUX_IGNORE_NEVERALLOWS := true
