@@ -17,7 +17,7 @@
 
 VENDOR_PATH := device/huawei/bach
 
-TARGET_KERNEL_VERSION := 3.18
+TARGET_KERNEL_VERSION := 4.9
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8937
@@ -27,6 +27,9 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm8937
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno505
 BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_PREBUILT_ELF_FILES := true
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -118,6 +121,9 @@ TARGET_SCREEN_DENSITY := 320
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
 
+# System-as-Root (required for A12)
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
 # Encryption
 TARGET_PROVIDES_KEYMASTER := true
 TARGET_HW_DISK_ENCRYPTION := true
@@ -160,14 +166,15 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_bach
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 slub_min_objects=12
-BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE += loop.max_part=7 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_SOURCE := kernel/huawei/bach
-TARGET_KERNEL_CONFIG := bach_defconfig
+TARGET_KERNEL_CONFIG := lineageos_bach_defconfig
 TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_KERNEL_CLANG_COMPILE := false
 
 # Malloc
 MALLOC_SVELTE := true
