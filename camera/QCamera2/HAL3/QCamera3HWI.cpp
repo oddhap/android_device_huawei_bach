@@ -758,9 +758,9 @@ int QCamera3HardwareInterface::openCamera()
     property_get("service.bootanim.exit", value, "0");
     if (atoi(value) == 1) {
         pthread_mutex_lock(&gCamLock);
-        if (gNumCameraSessions++ == 0) {
-            setCameraLaunchStatus(true);
-        }
+        // display.qservice is not present on bach; calling setCameraLaunchStatus()
+        // blocks camera open while ServiceManager waits for it to appear.
+        gNumCameraSessions++;
         pthread_mutex_unlock(&gCamLock);
     }
 
@@ -855,8 +855,8 @@ int QCamera3HardwareInterface::closeCamera()
     property_get("service.bootanim.exit", value, "0");
     if (atoi(value) == 1) {
         pthread_mutex_lock(&gCamLock);
-        if (--gNumCameraSessions == 0) {
-            setCameraLaunchStatus(false);
+        if (gNumCameraSessions > 0) {
+            gNumCameraSessions--;
         }
         pthread_mutex_unlock(&gCamLock);
     }
