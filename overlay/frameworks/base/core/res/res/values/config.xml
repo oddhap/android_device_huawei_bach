@@ -20,6 +20,9 @@
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
+    <!-- Enable software navigation so Android exposes gesture/3-button navigation modes. -->
+    <bool name="config_showNavigationBar">true</bool>
+
     <!-- Enable Settings > System > Gestures > System navigation. -->
     <bool name="config_swipe_up_gesture_setting_available">true</bool>
 
