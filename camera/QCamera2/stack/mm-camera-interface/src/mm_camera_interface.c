@@ -35,6 +35,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/sysmacros.h>
 #include <linux/media.h>
 #include <media/msm_cam_sensor.h>
 #include <dlfcn.h>
@@ -55,6 +57,36 @@ static mm_camera_ctrl_t g_cam_ctrl;
 
 static pthread_mutex_t g_handler_lock = PTHREAD_MUTEX_INITIALIZER;
 static uint16_t g_handler_history_count = 0; /* history count for handler */
+
+struct sensor_init_cfg_data32_4_9 {
+    uint8_t data[204];
+};
+
+#define VIDIOC_MSM_SENSOR_INIT_CFG32_4_9 \
+    _IOWR('V', BASE_VIDIOC_PRIVATE + 10, struct sensor_init_cfg_data32_4_9)
+
+static int mm_camera_find_subdev_by_dev(uint32_t major_num, uint32_t minor_num,
+        char *dev_name, size_t dev_name_len)
+{
+    uint32_t i = 0;
+
+    for (i = 0; i < 64; i++) {
+        char candidate[32];
+        struct stat st;
+
+        snprintf(candidate, sizeof(candidate), "/dev/v4l-subdev%u", i);
+        if (stat(candidate, &st) < 0 || !S_ISCHR(st.st_mode))
+            continue;
+
+        if (major(st.st_rdev) == major_num && minor(st.st_rdev) == minor_num) {
+            snprintf(dev_name, dev_name_len, "%s", candidate);
+            return 0;
+        }
+    }
+
+    LOGE("Failed to find v4l subdev for %u:%u", major_num, minor_num);
+    return -1;
+}
 
 // 16th (starting from 0) bit tells its a BACK or FRONT camera
 #define CAM_SENSOR_FACING_MASK (1U<<16)
@@ -1785,7 +1817,7 @@ uint8_t get_num_of_cameras()
     struct media_device_info mdev_info;
     int num_media_devices = 0;
     int8_t num_cameras = 0;
-    char subdev_name[32];
+    char subdev_name[32] = {0};
     int32_t sd_fd = -1;
     struct sensor_init_cfg_data cfg;
     char prop[PROPERTY_VALUE_MAX];
@@ -1845,15 +1877,32 @@ uint8_t get_num_of_cameras()
             }
             LOGD("entity name %s type %d group id %d",
                 entity.name, entity.type, entity.group_id);
-            if (entity.type == MEDIA_ENT_T_V4L2_SUBDEV &&
-                entity.group_id == MSM_CAMERA_SUBDEV_SENSOR_INIT) {
-                snprintf(subdev_name, sizeof(dev_name), "/dev/%s", entity.name);
+            if ((entity.type == MEDIA_ENT_T_V4L2_SUBDEV &&
+                    entity.group_id == MSM_CAMERA_SUBDEV_SENSOR_INIT) ||
+                    !strcmp(entity.name, "msm_sensor_init")) {
+                if (mm_camera_find_subdev_by_dev(entity.v4l.major,
+                        entity.v4l.minor, subdev_name,
+                        sizeof(subdev_name)) < 0) {
+                    if (!strcmp(entity.name, "msm_sensor_init")) {
+                        snprintf(subdev_name, sizeof(subdev_name),
+                                "/dev/v4l-subdev7");
+                    } else {
+                        snprintf(subdev_name, sizeof(subdev_name), "/dev/%s",
+                                entity.name);
+                    }
+                }
                 break;
             }
         }
         close(dev_fd);
         dev_fd = -1;
     }
+
+    if (subdev_name[0] == '\0') {
+        snprintf(subdev_name, sizeof(subdev_name), "/dev/v4l-subdev7");
+    }
+
+    LOGI("Opening sensor_init subdev %s", subdev_name);
 
     /* Open sensor_init subdev */
     sd_fd = open(subdev_name, O_RDWR);
@@ -1864,10 +1913,10 @@ uint8_t get_num_of_cameras()
 
     cfg.cfgtype = CFG_SINIT_PROBE_WAIT_DONE;
     cfg.cfg.setting = NULL;
-    if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
+    if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG32_4_9, &cfg) < 0) {
         LOGI("failed...Camera Daemon may not up so try again");
         for(i = 0; i < (MM_CAMERA_EVT_ENTRY_MAX + EXTRA_ENTRY); i++) {
-            if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
+            if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG32_4_9, &cfg) < 0) {
                 LOGI("failed...Camera Daemon may not up so try again");
                 continue;
             }
@@ -1917,7 +1966,7 @@ uint8_t get_num_of_cameras()
                 rc = 0;
                 break;
             }
-            if(entity.type == MEDIA_ENT_T_DEVNODE_V4L && entity.group_id == QCAMERA_VNODE_GROUP_ID) {
+            if(entity.type == MEDIA_ENT_T_DEVNODE_V4L) {
                 strlcpy(g_cam_ctrl.video_dev_name[num_cameras],
                      entity.name, sizeof(entity.name));
                 LOGE("dev_info[id=%d,name='%s']\n",
@@ -2301,4 +2350,3 @@ int mm_camera_module_event_handler(uint32_t session_id, cam_event_t *event)
    }
    return TRUE;
 }
-
