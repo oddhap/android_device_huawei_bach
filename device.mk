@@ -22,6 +22,12 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(VENDOR_PATH)/overlay \
     $(VENDOR_PATH)/overlay-lineage
 
+# Navigation
+PRODUCT_PACKAGES += \
+    NavigationBarMode2ButtonOverlay \
+    NavigationBarMode3ButtonOverlay \
+    NavigationBarModeGesturalOverlay
+
 # AAPT
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi
@@ -109,6 +115,7 @@ PRODUCT_PACKAGES += \
     libshim_camera
 
 PRODUCT_PACKAGES += \
+    Camera2 \
     Snap
 
 PRODUCT_COPY_FILES += \
