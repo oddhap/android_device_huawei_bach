@@ -166,7 +166,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_SOURCE := kernel/huawei/bach
-TARGET_KERNEL_CONFIG := bach_defconfig
+TARGET_KERNEL_CONFIG := lineageos_bach_defconfig
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 
 # Malloc
