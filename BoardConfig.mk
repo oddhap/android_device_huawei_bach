@@ -17,7 +17,7 @@
 
 VENDOR_PATH := device/huawei/bach
 
-TARGET_KERNEL_VERSION := 4.9
+TARGET_KERNEL_VERSION := 4.19
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8937
@@ -43,7 +43,6 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
-TARGET_USES_64_BIT_BINDER := true
 TARGET_BOARD_SUFFIX := _64
 
 # Assert
@@ -169,7 +168,7 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_SOURCE := kernel/huawei/bach
 TARGET_KERNEL_CONFIG := lineageos_bach_defconfig
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CLANG_VERSION := r353983c1
+TARGET_KERNEL_CLANG_VERSION := r547379
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 
 # Malloc
@@ -219,9 +218,9 @@ BOARD_ROOT_EXTRA_SYMLINKS += \
     /vendor/dsp:/dsp
 
 # SELinux
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(VENDOR_PATH)/sepolicy/private
-BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
+include device/qcom/sepolicy-legacy-um/SEPolicy.mk
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/private
+BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # Shims
