@@ -235,9 +235,6 @@ PRODUCT_PACKAGES += \
 
 # Lineage hardware
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.msm8937
-
-PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
 
 # LiveDisplay
