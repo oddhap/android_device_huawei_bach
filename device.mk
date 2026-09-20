@@ -17,6 +17,10 @@
 
 VENDOR_PATH := device/huawei/bach
 
+# The ten-era module list still references many modules removed/renamed on
+# 23.2; opt out of the existence check until it is migrated.
+PRODUCT_ENFORCE_PACKAGES_EXIST := false
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     $(VENDOR_PATH)/overlay \
