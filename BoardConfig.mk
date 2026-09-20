@@ -218,7 +218,6 @@ BOARD_ROOT_EXTRA_FOLDERS += \
     version
 BOARD_ROOT_EXTRA_SYMLINKS += \
     /vendor/firmware_mnt:/firmware \
-    /mnt/vendor/persist:/persist \
     /vendor/dsp:/dsp
 
 # SELinux
