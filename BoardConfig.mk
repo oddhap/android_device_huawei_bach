@@ -30,6 +30,9 @@ TARGET_ENFORCES_QSSI := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 BOARD_VNDK_VERSION := current
 BUILD_BROKEN_DUP_RULES := true
+# TODO: remove once the device/vendor tree no longer lists modules that were
+# renamed/removed on 23.2 (see the non-existent PRODUCT_PACKAGES list).
+BUILD_BROKEN_MISSING_MODULES := true
 
 # Architecture
 TARGET_ARCH := arm64
