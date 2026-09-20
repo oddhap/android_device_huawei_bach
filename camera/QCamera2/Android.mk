@@ -115,6 +115,10 @@ LOCAL_C_INCLUDES += \
 # Use the displayservice HIDL for vsync (gui/DisplayEventReceiver is unusable on 23.2)
 LOCAL_CFLAGS += -DUSE_DISPLAY_SERVICE
 
+# The QCOM Camera1 extension header (CAMERA_CMD_LONGSHOT_*, CAMERA_MSG_META_DATA,
+# camera_face_t.smile_degree, ...) is no longer shipped. Build the vanilla HAL paths.
+LOCAL_CFLAGS += -DVANILLA_HAL
+
 #LOCAL_STATIC_LIBRARIES := libqcamera2_util
 LOCAL_C_INCLUDES += \
         $(TARGET_OUT_HEADERS)/qcom/display
