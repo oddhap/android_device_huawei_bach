@@ -85,8 +85,7 @@ LOCAL_C_INCLUDES := \
         system/core/include/cutils \
         system/core/include/system \
         system/media/camera/include/system \
-        frameworks/av/camera/include \
-        frameworks/native/libs/gui/include
+        frameworks/av/camera/include
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
@@ -126,6 +125,7 @@ ifeq ($(TARGET_TS_MAKEUP),true)
 LOCAL_SHARED_LIBRARIES += libts_face_beautify_hal libts_detected_face_hal
 endif
 LOCAL_HEADER_LIBRARIES += media_plugin_headers
+LOCAL_HEADER_LIBRARIES += libgui_headers
 
 LOCAL_STATIC_LIBRARIES := android.hardware.camera.common@1.0-helper
 
