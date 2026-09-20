@@ -105,12 +105,18 @@ ifneq (,$(filter msm8996 msmcobalt msmfalcon,$(TARGET_BOARD_PLATFORM)))
     LOCAL_CFLAGS += -DUBWC_PRESENT
 endif
 
+# ION ABI v2 (dma-buf based, required for kernel >= 4.19)
+LOCAL_CFLAGS += -DTARGET_ION_ABI_VERSION=2
+LOCAL_C_INCLUDES += \
+    system/memory/libion/include \
+    system/memory/libion/kernel-headers
+
 #LOCAL_STATIC_LIBRARIES := libqcamera2_util
 LOCAL_C_INCLUDES += \
         $(TARGET_OUT_HEADERS)/qcom/display
 LOCAL_C_INCLUDES += \
         $(call project-path-for,qcom-display)/libqservice
-LOCAL_SHARED_LIBRARIES := liblog libhardware libutils libcutils libdl libsync
+LOCAL_SHARED_LIBRARIES := liblog libhardware libutils libcutils libdl libsync libion
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
 LOCAL_SHARED_LIBRARIES += libqdMetaData libqservice libbinder
 LOCAL_SHARED_LIBRARIES += libcutils libdl

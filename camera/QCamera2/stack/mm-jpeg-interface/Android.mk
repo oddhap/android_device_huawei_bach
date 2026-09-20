@@ -31,6 +31,12 @@ ifeq ($(strip $(TARGET_USES_ION)),true)
     LOCAL_CFLAGS += -DUSE_ION
 endif
 
+# ION ABI v2 (dma-buf based, required for kernel >= 4.19)
+LOCAL_CFLAGS += -DTARGET_ION_ABI_VERSION=2
+LOCAL_C_INCLUDES += \
+    system/memory/libion/include \
+    system/memory/libion/kernel-headers
+
 ifneq (,$(filter  msm8610,$(TARGET_BOARD_PLATFORM)))
     LOCAL_CFLAGS+= -DLOAD_ADSP_RPC_LIB
 endif
@@ -68,7 +74,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_MODULE           := libmmjpeg_interface
 LOCAL_PRELINK_MODULE   := false
-LOCAL_SHARED_LIBRARIES := libdl libcutils liblog libqomx_core libmmcamera_interface
+LOCAL_SHARED_LIBRARIES := libdl libcutils liblog libqomx_core libmmcamera_interface libion
 ifeq ($(strip $(LIB2D_ROTATION)),true)
     LOCAL_SHARED_LIBRARIES += libmmlib2d_interface
 endif
