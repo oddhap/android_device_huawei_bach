@@ -171,10 +171,7 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-# LOCAL: the 4.19 port currently lives at kernel/huawei/bach-4.19. Once the
-# oddhap/android_kernel_xiaomi_msm8937 fork has the bach-4.19-port branch,
-# point the local manifest and this at kernel/huawei/bach.
-TARGET_KERNEL_SOURCE := kernel/huawei/bach-4.19
+TARGET_KERNEL_SOURCE := kernel/huawei/bach
 TARGET_KERNEL_CONFIG := lineageos_bach_defconfig
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CLANG_VERSION := r547379
