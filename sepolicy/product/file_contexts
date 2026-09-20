@@ -1,0 +1,4 @@
+# QCOM HIDL interface libs are installed on /product by their Soong modules;
+# label them with a system_file_type so sepolicy_tests accepts them.
+/(system/product|product)/lib(64)?/vendor\.display\.config@1\.[0-9]\.so u:object_r:system_file:s0
+/(system/product|product)/lib(64)?/vendor\.qti\.hardware\.camera\.device@1\.0\.so u:object_r:system_file:s0
