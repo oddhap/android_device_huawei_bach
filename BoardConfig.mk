@@ -229,7 +229,8 @@ SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_M4DEFS += \
     dataservice_app=vendor_dataservice_app \
     dpmd=vendor_dpmd \
-    msm_irqbalanced=vendor_msm_irqbalanced
+    msm_irqbalanced=vendor_msm_irqbalanced \
+    persist_camera_prop=vendor_persist_camera_prop
 
 # Shims
 TARGET_LD_SHIM_LIBS += \
