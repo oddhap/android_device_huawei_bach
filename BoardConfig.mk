@@ -28,6 +28,7 @@ TARGET_BOARD_PLATFORM := msm8937
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno505
 TARGET_ENFORCES_QSSI := true
 BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 # TODO: remove once the device/vendor tree no longer lists modules that were
 # renamed/removed on 23.2 (see the non-existent PRODUCT_PACKAGES list).
 BUILD_BROKEN_MISSING_MODULES := true
