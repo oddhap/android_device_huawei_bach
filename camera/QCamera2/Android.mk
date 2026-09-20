@@ -112,12 +112,16 @@ LOCAL_C_INCLUDES += \
     system/memory/libion/include \
     system/memory/libion/kernel-headers
 
+# Use the displayservice HIDL for vsync (gui/DisplayEventReceiver is unusable on 23.2)
+LOCAL_CFLAGS += -DUSE_DISPLAY_SERVICE
+
 #LOCAL_STATIC_LIBRARIES := libqcamera2_util
 LOCAL_C_INCLUDES += \
         $(TARGET_OUT_HEADERS)/qcom/display
 LOCAL_C_INCLUDES += \
         $(call project-path-for,qcom-display)/libqservice
 LOCAL_SHARED_LIBRARIES := liblog libhardware libutils libcutils libdl libsync libion
+LOCAL_SHARED_LIBRARIES += android.frameworks.displayservice@1.0 libhidlbase
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
 LOCAL_SHARED_LIBRARIES += libqdMetaData libqservice libbinder
 LOCAL_SHARED_LIBRARIES += libcutils libdl
