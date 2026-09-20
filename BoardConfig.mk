@@ -27,8 +27,6 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm8937
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno505
 TARGET_ENFORCES_QSSI := true
-PRODUCT_FULL_TREBLE_OVERRIDE := true
-BOARD_VNDK_VERSION := current
 BUILD_BROKEN_DUP_RULES := true
 # TODO: remove once the device/vendor tree no longer lists modules that were
 # renamed/removed on 23.2 (see the non-existent PRODUCT_PACKAGES list).
