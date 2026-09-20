@@ -19,6 +19,9 @@ VENDOR_PATH := device/huawei/bach
 
 TARGET_KERNEL_VERSION := 4.19
 
+# A/B
+AB_OTA_UPDATER := false
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8937
 TARGET_NO_BOOTLOADER := true
