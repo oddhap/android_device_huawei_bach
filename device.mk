@@ -43,11 +43,9 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
     audio.primary.msm8937 \
     audio.r_submix.default \
     audio.usb.default \
-    libaacwrapper \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing
@@ -56,8 +54,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
-    android.hardware.soundtrigger@2.2-impl \
-    android.hardware.soundtrigger@2.2-service \
     android.hardware.audio@5.0 \
     android.hardware.audio.common@5.0 \
     android.hardware.audio.common@5.0-util \
@@ -102,8 +98,7 @@ PRODUCT_PACKAGES += \
     camera.msm8937 \
     libmmcamera_interface \
     libmmjpeg_interface \
-    libqomx_core \
-    libmm-qcamera
+    libqomx_core
 
 PRODUCT_PACKAGES += \
     android.frameworks.displayservice@1.0_32 \
@@ -115,14 +110,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     Camera2 \
-    Snap
+    Aperture
 
 PRODUCT_COPY_FILES += \
     $(VENDOR_PATH)/prebuilts/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
-
-# CNE
-PRODUCT_PACKAGES += \
-    libcnefeatureconfig
 
 # Configstore
 PRODUCT_PACKAGES += \
@@ -134,36 +125,28 @@ PRODUCT_PACKAGES += \
 
 # Display
 PRODUCT_PACKAGES += \
-    copybit.msm8937 \
     gralloc.msm8937 \
-    hwcomposer.msm8937 \
+    hwcomposer.qcom \
     libdisplayconfig \
     libqdMetaData.system \
-    libtinyxml \
-    memtrack.msm8937
+    libtinyxml
 
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service
+    vendor.qti.hardware.memtrack-service
     
 PRODUCT_PACKAGES += \
     vendor.display.config@1.9 \
-    vendor.display.config@1.9_vendor
+    vendor.display.config@1.9.vendor
 
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.2-service.clearkey
-
-# Encryption
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.cryptfshw@1.0-service-qti.qsee
+    android.hardware.drm-service.clearkey
 
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
@@ -196,10 +179,10 @@ PRODUCT_COPY_FILES += \
     $(VENDOR_PATH)/gps/etc/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
     $(VENDOR_PATH)/gps/etc/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf
 
-# Healthd
+# Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-impl \
-    android.hardware.health@2.0-service
+    android.hardware.health-service.qti \
+    android.hardware.health-service.qti_recovery
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -222,18 +205,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
-
-# Lights
-PRODUCT_PACKAGES += \
-    lights.msm8937
-
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
-
-# Lineage hardware
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
 
 # LiveDisplay
 #PRODUCT_PACKAGES += \
@@ -274,13 +245,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libmm-omxcore \
-    libOmxAacEnc \
-    libOmxAmrEnc \
     libOmxCore \
-    libOmxEvrcEnc \
-    libOmxG711Enc \
-    libOmxQcelp13Enc \
-    libOmxSwVencHevc \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw
@@ -328,7 +293,8 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service-qti
+    android.hardware.power@1.2.vendor \
+    android.hardware.power-service-qti
 
 PRODUCT_COPY_FILES += \
     $(VENDOR_PATH)/prebuilts/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
@@ -377,13 +343,6 @@ PRODUCT_PACKAGES += \
     init.qcom.early_boot.sh \
     init.qcom.sh
 
-# RCS
-PRODUCT_PACKAGES += \
-    rcs_service_aidl \
-    rcs_service_aidl.xml \
-    rcs_service_api \
-    rcs_service_api.xml
-
 # RenderScript
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
@@ -428,10 +387,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-# TextClassifier
-PRODUCT_PACKAGES += \
-    textclassifier.bundle1
-
 # Thermal
 PRODUCT_PACKAGES += \
     thermal.msm8937 \
@@ -441,19 +396,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(VENDOR_PATH)/prebuilts/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
-
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.basic \
+    android.hardware.usb@1.3-service.basic \
     com.android.future.usb.accessory
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl \
-    android.hardware.vibrator@1.0-service
+    vendor.qti.hardware.vibrator.service
 
 # WiFi
 PRODUCT_PACKAGES += \
@@ -466,7 +416,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
+    android.hardware.wifi-service
 
 PRODUCT_COPY_FILES += \
     $(VENDOR_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
