@@ -227,7 +227,9 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/private
 BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
 SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_M4DEFS += \
-    dataservice_app=vendor_dataservice_app
+    dataservice_app=vendor_dataservice_app \
+    dpmd=vendor_dpmd \
+    msm_irqbalanced=vendor_msm_irqbalanced
 
 # Shims
 TARGET_LD_SHIM_LIBS += \
