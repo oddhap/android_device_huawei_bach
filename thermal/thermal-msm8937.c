@@ -18,7 +18,7 @@
 
 
 #define LOG_TAG "ThermalHAL-msm8937"
-#include <utils/Log.h>
+#include <log/log.h>
 
 #include <hardware/hardware.h>
 #include <hardware/thermal.h>

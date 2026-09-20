@@ -32,7 +32,7 @@
 
 #if defined (USE_ANDROID_LOGGING) || defined (ANDROID)
 // Android and LE targets with logcat support
-#include <utils/Log.h>
+#include <log/log.h>
 
 #elif defined (USE_GLIB)
 // LE targets with no logcat support
