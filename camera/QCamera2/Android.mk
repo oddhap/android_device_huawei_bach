@@ -84,7 +84,9 @@ LOCAL_C_INCLUDES := \
         $(call project-path-for,qcom-media)/mm-core/inc \
         system/core/include/cutils \
         system/core/include/system \
-        system/media/camera/include/system
+        system/media/camera/include/system \
+        frameworks/av/camera/include \
+        frameworks/native/libs/gui/include
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
