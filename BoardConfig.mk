@@ -214,7 +214,6 @@ TARGET_USES_OLD_MNC_FORMAT := true
 BOARD_ROOT_EXTRA_FOLDERS += \
     cust \
     log \
-    persist \
     produce \
     version
 BOARD_ROOT_EXTRA_SYMLINKS += \
