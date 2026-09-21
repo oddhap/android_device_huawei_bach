@@ -95,22 +95,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl
 
-# Camera
-PRODUCT_PACKAGES += \
-    camera.msm8937 \
-    libmmcamera_interface \
-    libmmjpeg_interface \
-    libqomx_core \
-    libmm-qcamera
-
-PRODUCT_PACKAGES += \
-    android.frameworks.displayservice@1.0_32 \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
-
-PRODUCT_PACKAGES += \
-    libshim_camera
-
 PRODUCT_PACKAGES += \
     Camera2 \
     Snap
