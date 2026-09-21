@@ -17,6 +17,9 @@
 
 VENDOR_PATH := device/huawei/bach
 
+# LOS 20 bring-up: allow legacy vendor tree modules that do not exist yet
+PRODUCT_ENFORCE_PACKAGES_EXIST := false
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     $(VENDOR_PATH)/overlay \
