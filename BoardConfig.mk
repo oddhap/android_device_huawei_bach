@@ -27,6 +27,9 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm8937
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno505
 BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_MISSING_MODULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+ALLOW_MISSING_DEPENDENCIES := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -170,6 +173,8 @@ TARGET_KERNEL_SOURCE := kernel/huawei/bach
 TARGET_KERNEL_CONFIG := lineageos_bach_defconfig
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CLANG_VERSION := r353983c1
+TARGET_KERNEL_LLVM_BINUTILS := false
+KERNEL_CC := CC="clang"
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 
 # Malloc
@@ -219,9 +224,9 @@ BOARD_ROOT_EXTRA_SYMLINKS += \
     /vendor/dsp:/dsp
 
 # SELinux
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(VENDOR_PATH)/sepolicy/private
-BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
+include device/qcom/sepolicy-legacy-um/SEPolicy.mk
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/private
+BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # Shims
