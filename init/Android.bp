@@ -19,7 +19,9 @@ cc_library_static {
     recovery_available: true,
     srcs: ["init_msm8937.cpp"],
     include_dirs: [
-        "system/core/base/include",
         "system/core/init"
+    ],
+    header_libs: [
+        "libbase_headers"
     ]
 }
